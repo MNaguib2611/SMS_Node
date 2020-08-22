@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+      <title>Document</title>    <style>
+        .center {
+            margin: auto;
+            width: 50%;
+            border: 3px solid green;
+            padding: 10px 25px 10px 25px;
+            margin-top: 50px;
+        }
+
+        .pad5 {
+            padding: 10px 25px 10px 25px;
+        }
+        .mar5 {
+            margin: 100px 25px 10px 25px;
+        }
+
+        .float-right {
+            float: right;
+        }
+    </style>
+</head>
+
+<body class="pad5">    
+    <div class="center pad5 mar5">
+            <input type="number" class="pad5" id="phone" />
+            <input type="submit"  class="pad5" onclick="sendSMS();" />
+    </div>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
+    </script> 
+    
+    <script>
+        let phoneNum ;
+       
+
+        function sendSMS() {
+            phoneNum = document.getElementById("phone").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "http://localhost:3000/sms", true); 
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Response
+                var response = this.responseText;
+            }
+            };
+            var data = {phone:phoneNum};
+            xhttp.send(JSON.stringify(data));
+        }
+    
+    </script>
+</body>
+
+
+
+</html>
+
+
+
+
